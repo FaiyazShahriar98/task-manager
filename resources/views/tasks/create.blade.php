@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Task</title>
-</head>
-<body>
-    <h1>Create a New Task</h1>
-    <form action="/tasks" method="POST">
-        @csrf <!-- Protects against CSRF attacks -->
-        <label for="title">Task Title:</label><br>
-        <input type="text" id="title" name="title" required><br><br>
+@extends('layouts.app')
 
-        <label for="description">Task Description:</label><br>
-        <textarea id="description" name="description"></textarea><br><br>
+@section('content')
+    <div class="container">
+        <h2 class="text-center mb-4">Create New Task</h2>
 
-        <button type="submit">Create Task</button>
-    </form>
-    <a href="/">Back to Task List</a>
-</body>
-</html>
+        <div class="card shadow-sm p-4">
+            <form action="/tasks" method="POST">
+                @csrf
+
+                <div class="mb-3">
+                    <label class="form-label">Title:</label>
+                    <input type="text" name="title" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description:</label>
+                    <textarea name="description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">Create Task</button>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+@endsection

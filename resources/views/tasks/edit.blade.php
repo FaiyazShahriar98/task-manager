@@ -1,28 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Task</title>
-</head>
-<body>
-    <h1>Edit Task</h1>
-    <form action="{{ route('tasks.update', $task->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        
-        <label>Title:</label>
-        <input type="text" name="title" value="{{ $task->title }}" required>
-        
-        <label>Description:</label>
-        <textarea name="description">{{ $task->description }}</textarea>
-        
-        <label>Completed:</label>
-        <input type="checkbox" name="completed" {{ $task->completed ? 'checked' : '' }}>
+@extends('layouts.app')
 
-        <button type="submit">Update Task</button>
-    </form>
+@section('content')
+    <div class="container">
+        <h2 class="text-center mb-4">Edit Task</h2>
 
-    <a href="/">Back to Task List</a>
-</body>
-</html>
+        <div class="card shadow-sm p-4">
+            <form action="{{ route('tasks.update', $task->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label class="form-label">Title:</label>
+                    <input type="text" name="title" class="form-control" value="{{ $task->title }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description:</label>
+                    <textarea name="description" class="form-control" rows="3">{{ $task->description }}</textarea>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" name="completed" {{ $task->completed ? 'checked' : '' }}>
+                    <label class="form-check-label">Mark as Completed</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Task</button>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+@endsection
