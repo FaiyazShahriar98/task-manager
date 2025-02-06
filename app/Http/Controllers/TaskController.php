@@ -45,20 +45,22 @@ public function edit($id)
 public function update(Request $request, $id)
 {
     $task = Task::findOrFail($id);
+
     $request->validate([
         'title' => 'required|max:255',
         'description' => 'nullable',
-        'completed' => 'boolean'
+        'completed' => 'boolean' // Ensures only 0 or 1 is stored
     ]);
 
     $task->update([
         'title' => $request->title,
         'description' => $request->description,
-        'completed' => $request->completed ?? false
+        'completed' => $request->completed // Now always receives 0 or 1
     ]);
 
     return redirect('/')->with('success', 'Task updated successfully!');
 }
+
 
 public function destroy($id)
 {

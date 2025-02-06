@@ -20,9 +20,12 @@
                 </div>
 
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" name="completed" {{ $task->completed ? 'checked' : '' }}>
-                    <label class="form-check-label">Mark as Completed</label>
+                <!-- Hidden input ensures unchecked checkboxes send a value -->
+             <input type="hidden" name="completed" value="0">
+             <input type="checkbox" class="form-check-input" name="completed" value="1" {{ $task->completed ? 'checked' : '' }}>
+             <label class="form-check-label">Mark as Completed</label>
                 </div>
+
 
                 <button type="submit" class="btn btn-primary">Update Task</button>
                 <a href="/" class="btn btn-secondary">Cancel</a>
